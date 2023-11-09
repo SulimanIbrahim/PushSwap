@@ -14,6 +14,45 @@
 #include <stdlib.h>
 #include <string.h>
 
+typedef struct node
+{
+    int content;
+    struct node *next;
+} node_t;
+
+
+typedef struct stack
+{
+    struct node *top;
+} stack_t;
+
+void creat_stack(struct stack *stack)
+{
+    stack->top = NULL;
+}
+
+void push(struct stack *stack, int content)
+{
+    node_t *newNode;
+
+    newNode = (node_t *)malloc(sizeof(node_t));
+    newNode->content = content;
+    newNode->next = stack->top;
+    stack->top = newNode;
+}
+
+void printStack(struct stack *stack) 
+{
+    struct node *current;
+
+    current = stack->top;
+    while (current != NULL) 
+    {
+        printf("%d ", current->content);
+        current = current->next;
+    }
+    printf("\n");
+}
 void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
 	size_t			i;
@@ -96,7 +135,8 @@ int none_integers_check(char **arg) {
 	{
         j = 0;
         while (arg[i][j] != '\0') {
-            if ((arg[i][j] >= '0' && arg[i][j] <= '9') || arg[i][j] == '-' || arg[i][j] == ' ') 
+            if ((arg[i][j] >= '0' && arg[i][j] <= '9') 
+			|| arg[i][j] == '-' || arg[i][j] == ' ' || arg[i][j] == '+') 
                 j++;
         	 else 
                 return 1;
@@ -180,7 +220,7 @@ int	ft_atoi(const char *str)
 
 	res = 0;
 	sign = 1;
-	max = 9223372036854775807;
+	max = 2147483647;
 	while (*str == 32 || (*str >= 9 && *str <= 13))
 		str++;
 	if (*str == '-')
@@ -190,20 +230,42 @@ int	ft_atoi(const char *str)
 	while (*str >= '0' && *str <= '9' )
 	{
 		res = res * 10 + *str - '0';
-		if (res > max && sign == 1)
-			return (-1);
-		if (res > max + 1 && sign == -1)
+		if (res >= max)
 			return (0);
 		str++;
 	}
 	return (res * sign); 
 }
 
-int main(int ac, char **av)
+void check_doubles_array(char *arg)
+{
+	int i;
+	int j;
+
+	i = 1;
+	while(arg[i])
+	{
+		j = i + 1;
+		while(arg[j])
+		{
+			if(arg[i] == arg[j])
+			{
+				print("ERROR");
+				return;
+			}
+			j++;
+		}
+		i++;	
+	}
+}
+ int main(int ac, char **av)
 {
 	int i = 1;
 	int check = 0;
 	char *joined = strdup("");
+	int numbers;
+	struct stack stack_A, stack_B;
+    creat_stack(&stack_A);
 	while(av[i])
 	{
 		joined = ft_strjoin(joined, av[i]);
@@ -218,5 +280,14 @@ int main(int ac, char **av)
 		return 0;
 	}
 	while(*splitted)
-		printf("%s\n", *splitted++);
+	{
+		numbers = ft_atoi(*splitted++);
+		if(numbers == 0)
+		{
+			printf("ERROR");
+			return 0;
+		}
+		push(&stack_A, numbers);
+	}
+	printStack(&stack_A);
 }
