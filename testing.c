@@ -10,18 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
+#include "Push_Swap.h"
 
-typedef struct node
-{
 
-    void *content;
-    struct node *next;
 
-} node_t;
-
-node_t *ft_lstnew(void *content)
+node_t *ft_lstnew(int content)
 {
     node_t *new;
 
@@ -41,21 +34,21 @@ void add_node(node_t **node, node_t *new)
 
 
 
-int main()
-{
-    int new = 345;
-    int n = 9;
-    node_t *list = ft_lstnew(&new);
-    node_t *list1 = ft_lstnew(&n);
+// int main()
+// {
+//     int new = 345;
+//     int n = 9;
+//     node_t *list = ft_lstnew(&new);
+//     node_t *list1 = ft_lstnew(&n);
 
-  // add_node(&list, list1);
-   while(list != NULL)
-   {
-    printf("%d", (int)list->content);
-    list = list->next;
-   }
-    return 0;
-}
+//   // add_node(&list, list1);
+//    while(list != NULL)
+//    {
+//     printf("%d", (int)list->content);
+//     list = list->next;
+//    }
+//     return 0;
+// }
 
 // int main()
 // {

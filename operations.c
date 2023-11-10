@@ -10,20 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
-
-typedef struct node
-{
-    int content;
-    struct node *next;
-} node_t;
-
-
-typedef struct stack
-{
-    struct node *top;
-} stack;
+#include "Push_Swap.h"
 
 node_t	*ft_lstlast(node_t  *stack)
 {
@@ -96,18 +83,18 @@ void printStack(struct stack *stack)
     printf("\n");
 }
 
-int main()
-{ 
-        struct stack stack_A, stack_B;
-    creat_stack(&stack_A);
-    creat_stack(&stack_B);
+// int main()
+// { 
+//         struct stack stack_A, stack_B;
+//     creat_stack(&stack_A);
+//     creat_stack(&stack_B);
 
-    push(&stack_A, 5);
-    push(&stack_A, 4);
-    push(&stack_A, 7);
-    push(&stack_A, 8);
+//     push(&stack_A, 5);
+//     push(&stack_A, 4);
+//     push(&stack_A, 0);
+//     push(&stack_A, 8);
  
-    rotate_a(&stack_A);
-    printStack(&stack_A);
-   // printf("index num = %d Position num = %d\n", peek(&stack_A,4), peek(&stack_A,4) + 1);
-}
+//     rotate_a(&stack_A);
+//     printStack(&stack_A);
+//    // printf("index num = %d Position num = %d\n", peek(&stack_A,4), peek(&stack_A,4) + 1);
+// }
