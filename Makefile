@@ -6,13 +6,13 @@
 #    By: suibrahi <suibrahi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/23 16:59:41 by suibrahi          #+#    #+#              #
-#    Updated: 2023/08/15 02:32:53 by suibrahi         ###   ########.fr        #
+#    Updated: 2023/11/10 16:53:50 by suibrahi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS	= operations.c\
 		parsing.c\
-		testing.c\
+		push_swap_utils.c\
 	
 
 CC		= cc

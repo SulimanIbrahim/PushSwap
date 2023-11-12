@@ -6,7 +6,7 @@
 /*   By: suibrahi <suibrahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 04:10:27 by suibrahi          #+#    #+#             */
-/*   Updated: 2023/10/19 17:03:58 by suibrahi         ###   ########.fr       */
+/*   Updated: 2023/11/13 01:05:34 by suibrahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,14 @@ void creat_stack(struct stack *stack)
 
 void push(struct stack *stack, int content)
 {
-    node_t *newNode;
+    node_t *new_node;
 
-    newNode = (node_t *)malloc(sizeof(node_t));
-    newNode->content = content;
-    newNode->next = stack->top;
-    stack->top = newNode;
+    new_node = (node_t *)malloc(sizeof(node_t));
+    new_node->content = content;
+    new_node->next = stack->top;
+    stack->top = new_node;
 }
+
 void pop(struct stack *stack)
 {
     stack->top = stack->top->next; 
@@ -58,17 +59,37 @@ int peek(struct stack *stack, int content)
     return -1;
 }
 
+
+/**
+ * 
+*/
 void rotate_a(struct stack *stack)
 {
-    struct node *current;
-
-    current = stack->top;
-
-    ft_lstlast(stack->top);
-    current->next->next = stack->top;
-    stack->top = current->next;
-    current->next=NULL;
-} 
+	struct node *head;
+    struct node *tail;
+    
+    head = stack->top;
+    tail = ft_lstlast(head);
+    stack->top = head->next;
+    head->next = NULL;
+    tail->next = head;
+}
+void rotate_reverse_a(struct stack *stack)
+{
+    // printf("ds");
+	struct node *head;
+    struct node *tail;
+    struct node *temp;
+    
+    head = stack->top;
+    temp = stack->top;
+    while (head->next->next)
+        head = head->next;       
+    tail = ft_lstlast(temp);
+    stack->top = tail;
+    tail->next = temp;
+    head->next = NULL; 
+}
 
 void printStack(struct stack *stack) 
 {
@@ -77,10 +98,10 @@ void printStack(struct stack *stack)
     current = stack->top;
     while (current != NULL) 
     {
-        printf("%d ", current->content);
+        printf("%d \n", current->content);
         current = current->next;
     }
-    printf("\n");
+  //  printf("\n");
 }
 
 // int main()
@@ -93,7 +114,6 @@ void printStack(struct stack *stack)
 //     push(&stack_A, 4);
 //     push(&stack_A, 0);
 //     push(&stack_A, 8);
- 
 //     rotate_a(&stack_A);
 //     printStack(&stack_A);
 //    // printf("index num = %d Position num = %d\n", peek(&stack_A,4), peek(&stack_A,4) + 1);

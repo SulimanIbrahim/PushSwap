@@ -6,14 +6,14 @@
 /*   By: suibrahi <suibrahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 02:46:10 by suibrahi          #+#    #+#             */
-/*   Updated: 2023/11/01 22:45:14 by suibrahi         ###   ########.fr       */
+/*   Updated: 2023/11/11 19:26:57 by suibrahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Push_Swap.h"
 
-
-int none_integers_check(char **arg) {
+int none_integers_check(char **arg) 
+{
     int i;
 	int j;
 
@@ -30,7 +30,6 @@ int none_integers_check(char **arg) {
         }
         i++;
     }
-
     return 0;
 }
 
