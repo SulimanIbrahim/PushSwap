@@ -6,7 +6,7 @@
 /*   By: suibrahi <suibrahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 02:46:10 by suibrahi          #+#    #+#             */
-/*   Updated: 2023/11/11 19:26:57 by suibrahi         ###   ########.fr       */
+/*   Updated: 2023/11/20 03:55:24 by suibrahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,43 +21,50 @@ int none_integers_check(char **arg)
     while (arg[i]) 
 	{
         j = 0;
-        while (arg[i][j] != '\0') {
-            if ((arg[i][j] >= '0' && arg[i][j] <= '9') 
-			|| arg[i][j] == '-' || arg[i][j] == ' ' || arg[i][j] == '+') 
+        while (arg[i][j] != '\0') 
+		{
+            if ((arg[i][j] >= '0' && arg[i][j] <= '9')) 
                 j++;
-        	 else 
-                return 1;
-        }
+        	else if (arg[i][j] == '-' || arg[i][j] == '+')
+                {
+					if (j > 0 || (arg[i][j + 1] == '\0'))
+						return (1);
+					else 
+						j++;
+				}
+			else
+				return (1); 
+		}
         i++;
     }
     return 0;
 }
 
 
-int	ft_atoi(const char *str)
-{
-	int					sign;
-	unsigned long long	res;
-	unsigned long long	max;
+// int	ft_atoi(const char *str)
+// {
+// 	int					sign;
+// 	unsigned long long	res;
+// 	unsigned long long	max;
 
-	res = 0;
-	sign = 1;
-	max = 2147483647;
-	while (*str == 32 || (*str >= 9 && *str <= 13))
-		str++;
-	if (*str == '-')
-		sign *= -1;
-	if (*str == '-' || *str == '+')
-		str++;
-	while (*str >= '0' && *str <= '9' )
-	{
-		res = res * 10 + *str - '0';
-		if (res >= max)
-			return (0);
-		str++;
-	}
-	return (res * sign); 
-}
+// 	res = 0;
+// 	sign = 1;
+// 	max = 2147483647;
+// 	while (*str == 32 || (*str >= 9 && *str <= 13))
+// 		str++;
+// 	if (*str == '-')
+// 		sign *= -1;
+// 	if (*str == '-' || *str == '+')
+// 		str++;
+// 	while (*str >= '0' && *str <= '9' )
+// 	{
+// 		res = res * 10 + *str - '0';
+// 		if (res >= max)
+// 			return (0);
+// 		str++;
+// 	}
+// 	return (res * sign); 
+// }
 
 void check_doubles_array(char *arg)
 {
@@ -72,7 +79,7 @@ void check_doubles_array(char *arg)
 		{
 			if(arg[i] == arg[j])
 			{
-				printf("ERROR");
+				write(2, "Error\n", 7);
 				return;
 			}
 			j++;
@@ -80,36 +87,29 @@ void check_doubles_array(char *arg)
 		i++;	
 	}
 }
-//  int main(int ac, char **av)
-// {
-// 	int i = 1;
-// 	int check = 0;
-// 	char *joined = ft_strdup("");
-// 	int numbers;
-// 	struct stack stack_A, stack_B;
-//     creat_stack(&stack_A);
-// 	while(av[i])
-// 	{
-// 		joined = ft_strjoin(joined, av[i]);
-// 		i++;
-// 	}
-	
-//  	char **splitted = ft_split(joined, ' ');
-// 	check = none_integers_check(splitted);
-// 	if (check == 1)
-// 	{
-// 		printf("ERROR");
-// 		return 0;
-// 	}
-// 	while(*splitted)
-// 	{
-// 		numbers = ft_atoi(*splitted++);
-// 		if(numbers == 0)
-// 		{
-// 			printf("ERROR");
-// 			return 0;
-// 		}
-// 		push(&stack_A, numbers);
-// 	}
-// 	printStack(&stack_A);
-// }
+
+char **parsing(int ac, char **av)
+{
+	int i;
+	int check;
+	char *joined;
+	char **splitted;
+	 
+	joined = ft_strdup("");
+	i = 1;
+	check = 0;
+	while(av[i])
+	{
+		joined = ft_strjoin(joined, av[i]);
+		joined = ft_strjoin(joined," ");
+		i++;
+	}
+ 	splitted = ft_split(joined, ' ');
+	check = none_integers_check(splitted);
+	if (check == 1)
+	{
+		write(2, "Error\n", 7);
+		return NULL;
+	}
+	return (splitted);
+}

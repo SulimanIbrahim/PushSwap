@@ -6,7 +6,7 @@
 /*   By: suibrahi <suibrahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 21:04:56 by suibrahi          #+#    #+#             */
-/*   Updated: 2023/08/07 03:54:57 by suibrahi         ###   ########.fr       */
+/*   Updated: 2023/11/13 20:26:25 by suibrahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,16 +59,16 @@ char	**ft_split(char const *s, char c)
 	substr[j] = NULL;
 	return (substr);
 }
-int main()
-{
-	char *s = "thgfv yjghb yjfhgvn";
-	char **result;
-	result = ft_split(s,' ');
+// int main()
+// {
+// 	char *s = "thgfv yjghb yjfhgvn";
+// 	char **result;
+// 	result = ft_split(s,' ');
 
-	int i = 0;
-	while(result[i] != NULL)
-	{
-		printf("%s\n", result[i]);
-		i++;
-	}
-}
+// 	int i = 0;
+// 	while(result[i] != NULL)
+// 	{
+// 		printf("%s\n", result[i]);
+// 		i++;
+// 	}
+// }
