@@ -6,29 +6,12 @@
 /*   By: suibrahi <suibrahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 22:25:49 by suibrahi          #+#    #+#             */
-/*   Updated: 2023/11/19 00:48:02 by suibrahi         ###   ########.fr       */
+/*   Updated: 2023/11/22 05:35:51 by suibrahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Push_Swap.h"
 
-static int is_sorted(stack *stack_a)
-{
-    node_t *current;
-    node_t *temp;
-
-    current = stack_a->top;
-    temp = stack_a->top;
-
-    while(current->next)
-    {
-        if(current->index > current->next->index)
-            return (0);
-        current = current->next;
-    }
-
-    return (1);
-}
 static int bits_max(node_t *node)
 {
     node_t *current;
@@ -54,20 +37,6 @@ static int bits_max(node_t *node)
     return (max_bits);
 }
 
-int stack_lengh(node_t *node)
-{
-    int len;
-    node_t *current;
-    
-    len = 0;
-    current = node;
-    while (current)
-    {
-        current = current->next;
-        len++;
-    }
-    return(len);
-}
 
 void radix(stack *a, stack *b)
 {
@@ -83,22 +52,34 @@ void radix(stack *a, stack *b)
         {
           //  int mask = 1 << i;
             if ((a->top->index / (1 << i)) % 2 == 1)
-            {
                 rotate_a(a);
-            }
             else if ((a->top->index / (1 << i)) % 2 == 0)
-            {
                 push_b(a, b);
-            }
             j++;
         }
         while (b->top)
         {
-            push_a(b, a);
+            push_a(b , a);
         }
         i++;
     }
-    
+}
+
+void sort_stacks(stack *a,stack *b, int ac)
+{
+    if(!is_sorted(a))
+    {
+        // stack *stack_b;
+
+        // creat_stack(stack_b);
+        (void)ac;
+        set_index_to_mins(a);
+        radix(a, b);
+    } else
+    {
+        free_nodes(a, 0);
+        exit(1);
+    }
 }
 // void radix(stack *stack_a, stack *stack_b)
 // {

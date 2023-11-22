@@ -6,7 +6,7 @@
 #    By: suibrahi <suibrahi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/23 16:59:41 by suibrahi          #+#    #+#              #
-#    Updated: 2023/08/08 20:22:16 by suibrahi         ###   ########.fr        #
+#    Updated: 2023/11/20 22:34:46 by suibrahi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,6 @@ FILES = ft_memset \
 		ft_isprint \
 		ft_toupper \
 		ft_tolower \
-		ft_calloc \
 		ft_strdup \
 		ft_substr \
 		ft_strjoin \

@@ -6,7 +6,7 @@
 /*   By: suibrahi <suibrahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 19:07:51 by suibrahi          #+#    #+#             */
-/*   Updated: 2023/11/20 03:54:16 by suibrahi         ###   ########.fr       */
+/*   Updated: 2023/11/22 05:33:27 by suibrahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,25 +51,27 @@ node_t *set_index_to_mins(stack *stack)
 	char **args;
 	int numbers;
 	int index;
-	struct stack stack_A, stack_B;
+	struct stack stack_a, stack_b;
 
-    creat_stack(&stack_A);
 	index = 0;
-	args = parsing(ac, av);	
-	while (args[index])
- 		index++;
-	while (index > 0)
+	creat_stack(&stack_a);
+	creat_stack(&stack_b);
+	if(ac > 2)
 	{
-		numbers = ft_atoi(args[--index]);
-		push_to_stack(&stack_A, numbers);
+		args = parsing(ac, av);
+		while(args[index])
+			index++;
+		while (index > 0)
+		{
+			numbers = ft_atoi(args[--index]);
+			push_to_stack(&stack_a, numbers);
+		}
+			free_args(args, 0);
+			check_duplcates(&stack_a);
+			sort_stacks(&stack_a, &stack_b, ac);
+			//printStack(&stack_a);
 	}
-		set_index_to_mins(&stack_A);
-		// if (ac == 3)
-		// 	sort_three(&stack_A);
-		// else if (ac <= 5)
-		// 	sort_4_5()
-		radix(&stack_A, &stack_B);
-	//printStack(&stack_A);
+	return (0);
 }
 // node_t *set_index_to_mins(stack *stack)
 // {

@@ -6,86 +6,68 @@
 /*   By: suibrahi <suibrahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 02:46:10 by suibrahi          #+#    #+#             */
-/*   Updated: 2023/11/20 03:55:24 by suibrahi         ###   ########.fr       */
+/*   Updated: 2023/11/22 05:28:20 by suibrahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Push_Swap.h"
 
-int none_integers_check(char **arg) 
+void none_integers_check(char **arg) 
 {
     int i;
 	int j;
 
-	i = 1;
+	i = 0;
     while (arg[i]) 
 	{
         j = 0;
         while (arg[i][j] != '\0') 
 		{
-            if ((arg[i][j] >= '0' && arg[i][j] <= '9')) 
+            if ((arg[i][j] >= '0' && arg[i][j] <= '9'))
                 j++;
         	else if (arg[i][j] == '-' || arg[i][j] == '+')
                 {
 					if (j > 0 || (arg[i][j + 1] == '\0'))
-						return (1);
-					else 
+						{
+							free_args(arg, 1);
+							exit(1);
+						}
+					else
 						j++;
 				}
 			else
-				return (1); 
+				{
+					free_args(arg, 1);
+					exit(1);
+				}
 		}
         i++;
     }
-    return 0;
 }
 
-
-// int	ft_atoi(const char *str)
-// {
-// 	int					sign;
-// 	unsigned long long	res;
-// 	unsigned long long	max;
-
-// 	res = 0;
-// 	sign = 1;
-// 	max = 2147483647;
-// 	while (*str == 32 || (*str >= 9 && *str <= 13))
-// 		str++;
-// 	if (*str == '-')
-// 		sign *= -1;
-// 	if (*str == '-' || *str == '+')
-// 		str++;
-// 	while (*str >= '0' && *str <= '9' )
-// 	{
-// 		res = res * 10 + *str - '0';
-// 		if (res >= max)
-// 			return (0);
-// 		str++;
-// 	}
-// 	return (res * sign); 
-// }
-
-void check_doubles_array(char *arg)
+int check_duplcates(stack *stack_a)
 {
-	int i;
-	int j;
+	node_t *current;
+    node_t *temp;
 
-	i = 1;
-	while(arg[i])
-	{
-		j = i + 1;
-		while(arg[j])
+    current = stack_a->top;
+
+    while(current->next)
+    {
+    	temp = current->next;
+        while(temp)
 		{
-			if(arg[i] == arg[j])
-			{
-				write(2, "Error\n", 7);
-				return;
-			}
-			j++;
+			if(current->content == temp->content)
+				{
+					free_nodes(stack_a, 1);
+					exit(1);
+				}
+			temp = temp->next;
 		}
-		i++;	
-	}
+        current = current->next;
+    }
+
+    return (0);
 }
 
 char **parsing(int ac, char **av)
@@ -95,21 +77,40 @@ char **parsing(int ac, char **av)
 	char *joined;
 	char **splitted;
 	 
-	joined = ft_strdup("");
-	i = 1;
+	i = 0;
+	(void)ac;
 	check = 0;
-	while(av[i])
+	joined = ft_strdup("");
+	if(joined == NULL)
+		return(free(joined), NULL);
+	while(av[++i])
 	{
 		joined = ft_strjoin(joined, av[i]);
-		joined = ft_strjoin(joined," ");
-		i++;
+		joined = ft_strjoin(joined, " ");
 	}
  	splitted = ft_split(joined, ' ');
-	check = none_integers_check(splitted);
+	if(splitted == NULL)
+		return(free(joined), NULL);
+	none_integers_check(splitted);
 	if (check == 1)
 	{
 		write(2, "Error\n", 7);
-		return NULL;
+		exit(1);
 	}
-	return (splitted);
+	return (free (joined), splitted);
 }
+
+// void free_nodes(stack *stack)
+// {
+// 	node_t *current;
+// 	node_t *next_node;
+	
+// 	current = stack->top;
+// 	next_node = NULL;
+// 	while(current != NULL)
+// 	{
+// 		next_node = current->next;
+// 		free(current);
+// 		current = next_node;
+// 	}
+// }

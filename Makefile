@@ -6,7 +6,7 @@
 #    By: suibrahi <suibrahi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/23 16:59:41 by suibrahi          #+#    #+#              #
-#    Updated: 2023/11/19 22:19:41 by suibrahi         ###   ########.fr        #
+#    Updated: 2023/11/21 23:31:00 by suibrahi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ SRCS	= operations.c\
 
 CC		= cc
 
-CFLAGS	=
+CFLAGS	= -Wall -Wextra -Werror -fsanitize=address -g3
 
 OBJS	= $(SRCS:.c=.o)
 

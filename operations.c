@@ -6,7 +6,7 @@
 /*   By: suibrahi <suibrahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 04:10:27 by suibrahi          #+#    #+#             */
-/*   Updated: 2023/11/18 21:25:54 by suibrahi         ###   ########.fr       */
+/*   Updated: 2023/11/22 03:25:10 by suibrahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,14 @@ void push_to_stack(struct stack *stack, int content)
     node_t *new_node;
 
     new_node = (node_t *)malloc(sizeof(node_t));
+    if(!new_node)
+        free_nodes(stack, 0);
     new_node->content = content;
     new_node->next = stack->top;
     stack->top = new_node;
     new_node->index = -1;
 }
-// void push_a(struct stack *stack, int content)
-// {
-//     node_t *new_node;
 
-//     new_node = (node_t *)malloc(sizeof(node_t));
-//     stack->top =  
-// }
 void push_b(struct stack *stack_a, struct stack *stack_b)
 {
     node_t *new_node;
@@ -53,6 +49,11 @@ void push_b(struct stack *stack_a, struct stack *stack_b)
     new_node = stack_b->top;
     old_node = stack_a->top;
     new_node = (node_t *)malloc(sizeof(node_t));
+    if(!new_node)
+    {
+        free_nodes(stack_a, 0);
+        free_nodes(stack_b, 0);
+    }
     new_node->content = old_node->content;
     new_node->next = stack_b->top;
     stack_b->top = new_node;
@@ -68,6 +69,11 @@ void push_a(struct stack *stack_b, struct stack *stack_a)
     new_node = stack_a->top;
     old_node = stack_b->top;
     new_node = (node_t *)malloc(sizeof(node_t));
+     if(!new_node)
+     {
+        free_nodes(stack_a, 0);
+        free_nodes(stack_b, 0);
+     }
     new_node->content = old_node->content;
     new_node->next = stack_a->top;
     stack_a->top = new_node;
@@ -78,12 +84,20 @@ void push_a(struct stack *stack_b, struct stack *stack_a)
 
 void pop(struct stack *stack)
 {
-    // node_t *temp;
-    // temp = stack->top;
-    stack->top = stack->top->next;
-    // free(temp);
-}
+    node_t *temp;
 
+    temp = stack->top;
+    if (!stack->top->next)
+    {
+        free(temp);
+        stack->top = NULL;
+    }
+    else
+    {
+        stack->top = stack->top->next;
+        free(temp);
+    }
+}
 int peek(struct stack *stack, int content) 
 {
     struct node *current = stack->top;
@@ -114,7 +128,6 @@ void rotate_a(struct stack *stack)
 }
 void rotate_reverse_a(struct stack *stack)
 {
-    // printf("ds");
 	struct node *head;
     struct node *tail;
     struct node *temp;
@@ -126,7 +139,8 @@ void rotate_reverse_a(struct stack *stack)
     tail = ft_lstlast(temp);
     stack->top = tail;
     tail->next = temp;
-    head->next = NULL; 
+    head->next = NULL;
+        write(1,"rra\n",3);
 }
 
 void printStack(struct stack *stack) 
@@ -140,26 +154,3 @@ void printStack(struct stack *stack)
         current = current->next;
     }
 }
-
-// int main()
-// { 
-//         struct stack stack_A, stack_B;
-//     creat_stack(&stack_A);
-//     creat_stack(&stack_B);
-
-//     push_to_stack(&stack_A, 5);
-//     push_to_stack(&stack_A, 4);
-//     push_to_stack(&stack_A, 0);
-//     push_to_stack(&stack_A, 8);
-    
-//     push_b(&stack_A, &stack_B);
-//     push_b(&stack_A, &stack_B);
-//     push_b(&stack_A, &stack_B);
-//     push_b(&stack_A, &stack_B);
-//     push_a(&stack_B, &stack_A);
-//    // rotate_a(&stack_A);
-//     printStack(&stack_A);
-//     printf("\n");
-//     printStack(&stack_B);
-//    // printf("index num = %d Position num = %d\n", peek(&stack_A,4), peek(&stack_A,4) + 1);
-// }

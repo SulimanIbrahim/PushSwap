@@ -6,7 +6,7 @@
 /*   By: suibrahi <suibrahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 14:52:11 by suibrahi          #+#    #+#             */
-/*   Updated: 2023/11/10 17:27:21 by suibrahi         ###   ########.fr       */
+/*   Updated: 2023/11/20 22:34:32 by suibrahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void			*ft_memchr(const void *s, int c, size_t n);
 int				ft_memcmp(const void *s1, const void *s2, size_t n);
 char			*ft_strdup(const char *s1);
 char			*ft_strndup(const char *s1, size_t n);
-void			*ft_calloc(size_t count, size_t size);
 size_t			ft_strlen(const char *s);
 char			*ft_strchr(const char *s, int c);
 char			*ft_strrchr(const char *s, int c);

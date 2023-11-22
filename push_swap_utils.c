@@ -6,12 +6,45 @@
 /*   By: suibrahi <suibrahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 19:28:58 by suibrahi          #+#    #+#             */
-/*   Updated: 2023/11/10 16:52:57 by suibrahi         ###   ########.fr       */
+/*   Updated: 2023/11/22 05:26:17 by suibrahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Push_Swap.h"
 
+
+void free_args(char **av, int flag)
+{
+    int i;
+
+    i = 0;
+    if (flag == 1)
+        write(2, "Error\n", 7);
+    if (av)
+    {
+        while(av[i])
+        {
+            free(av[i]);
+            i++;   
+        }
+        free(av);
+    }
+}
+void free_nodes(stack *stack, int flag)
+{
+    node_t *next_node;    
+    node_t *temp;    
+
+    next_node = NULL;
+    temp = NULL;
+    if (flag == 1)
+        write(2, "Error\n", 7);	
+    while(stack->top != NULL)
+    {
+        pop(stack);
+        stack->top = stack->top->next;
+    }
+}
 node_t *ft_lstnew(int content)
 {
     node_t *new;
@@ -28,6 +61,37 @@ void add_node(node_t **node, node_t *new)
 {
     new->next = *node;
     *node = new;
+}
+int is_sorted(stack *stack_a)
+{
+    node_t *current;
+    node_t *temp;
+
+    current = stack_a->top;
+    temp = stack_a->top;
+
+    while(current->next)
+    {
+        if(current->index > current->next->index)
+            return (0);
+        current = current->next;
+    }
+
+    return (1);
+}
+int stack_lengh(node_t *node)
+{
+    int len;
+    node_t *current;
+    
+    len = 0;
+    current = node;
+    while (current)
+    {
+        current = current->next;
+        len++;
+    }
+    return(len);
 }
 
 
