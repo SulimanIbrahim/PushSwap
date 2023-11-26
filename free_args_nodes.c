@@ -1,60 +1,57 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   free_args_nodes.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: suibrahi <suibrahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/04 02:26:13 by suibrahi          #+#    #+#             */
-/*   Updated: 2023/11/26 19:33:29 by suibrahi         ###   ########.fr       */
+/*   Created: 2023/11/26 18:51:10 by suibrahi          #+#    #+#             */
+/*   Updated: 2023/11/26 19:28:26 by suibrahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "Push_Swap.h"
 
-static void	free_args(char **av, int flag)
+void	pop(t_stack *stack)
+{
+	t_node	*temp;
+
+	if (stack->top == NULL)
+		return ;
+	temp = stack->top;
+	stack->top = stack->top->next;
+	free(temp);
+}
+
+void	free_args(char **av, int flag)
 {
 	int	i;
 
 	i = 0;
 	if (flag == 1)
-	{
 		write(2, "Error\n", 7);
-	}
-	if (av[i])
+	if (av)
 	{
 		while (av[i])
 		{
 			free(av[i]);
 			i++;
 		}
-		free (av);
+		free(av);
 	}
 }
 
-int	ft_atoi(char *str, char **args, int *flag)
+void	free_nodes(t_stack *stack, int flag)
 {
-	int			sign;
-	long long	res;
-
-	res = 0;
-	sign = 1;
-	while (*str == 32 || (*str >= 9 && *str <= 13))
-		str++;
-	if (*str == '-')
-		sign *= -1;
-	if (*str == '-' || *str == '+')
-		str++;
-	while (*str >= '0' && *str <= '9' )
+	if (flag == 1)
+		write(2, "Error\n", 7);
+	while (stack->top != NULL)
 	{
-		res = res * 10 + *str - '0';
-		if (res > 2147483647 || res < -2147483648)
-		{
-			free_args(args, 1);
-			*flag = 1;
-			return (0);
-		}
-		str++;
+		pop(stack);
 	}
-	return (res * sign); 
+}
+
+void	creat_stack(t_stack *stack)
+{
+	stack->top = NULL;
 }

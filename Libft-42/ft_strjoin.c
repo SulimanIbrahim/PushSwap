@@ -6,7 +6,7 @@
 /*   By: suibrahi <suibrahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 04:35:08 by suibrahi          #+#    #+#             */
-/*   Updated: 2023/11/20 04:19:46 by suibrahi         ###   ########.fr       */
+/*   Updated: 2023/11/24 20:51:03 by suibrahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,5 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		j++;
 	}
 	strjoin[i + j] = '\0';
-	return (strjoin);
+	return (free((char *)s1), strjoin);
 }

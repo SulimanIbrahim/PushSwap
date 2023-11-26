@@ -6,12 +6,15 @@
 /*   By: suibrahi <suibrahi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 16:32:31 by suibrahi          #+#    #+#             */
-/*   Updated: 2023/11/21 23:38:27 by suibrahi         ###   ########.fr       */
+/*   Updated: 2023/11/26 19:15:46 by suibrahi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
+# define PRINT_ERROR 1
+# define JUST_FREE 0 
+# define JUST_EXIT 2 
 
 # include "Libft-42/libft.h"
 # include <stdarg.h>
@@ -22,42 +25,47 @@
 
 typedef struct node
 {
-    int content;
-    int index;
-    struct node *next;
-} node_t;
+	int			content;
+	int			index;
+	struct node	*next;
+}	t_node;
 
-typedef struct stack
+typedef struct t_stack
 {
-    struct node *top;
-} stack;
+	struct node	*top;
+}	t_stack;
 
-node_t	*ft_lstlast(node_t  *stack);
-node_t *ft_lstnew(int content);
-void push_a(struct stack *stack_b, struct stack *stack_a);
-void push_b(struct stack *stack_a, struct stack *stack_b);
-void none_integers_check(char **arg);
-void radix(stack *stack_a, stack *stack_b);
-void index_bits_max(struct stack *stack);
-void add_node(node_t **node, node_t *new);
-void push_to_stack(struct stack *stack, int content);
-void rotate_a(struct stack *stack);
-void rotate_reverse_a(struct stack *stack);
-void creat_stack(struct stack *stack);
-void pop(struct stack *stack);
-void sort_stacks(stack *a, stack *b, int ac);
-void free_nodes(stack *stack, int flag);
-void free_args(char **av, int flag);
-int peek(struct stack *stack, int content);
-int is_sorted(stack *stack_a);
-int stack_lengh(node_t *node);
-void printStack(struct stack *stack);
-char **parsing(int ac, char **av);
-void free_args(char **av, int flag);
-int check_duplcates(stack *stack_a);
-node_t *set_index_to_mins(stack *stack);
+t_node	*ft_lstlast(t_node *stack);
+t_node	*set_index_to_mins(t_stack *stack);
+t_node	*get_min(t_stack *stack);
 
+char	**parsing(char **av);
 
+void	check_args(char **av);
+void	check_duplcates(t_stack *stack_a);
+void	creat_stack(t_stack *stack);
+void	none_integers_check(char **arg);
 
+void	push_to_stack(t_stack *stack, int content);
+void	push_a(t_stack *stack_b, t_stack *stack_a);
+void	push_b(t_stack *stack_a, t_stack *stack_b);
+void	swap_a(t_stack *stack);
+void	rotate_a(t_stack *stack);
+void	rotate_reverse_a(t_stack *stack);
+
+void	sort_stacks(t_stack *a);
+void	radix(t_stack *stack_a, t_stack *stack_b);
+void	sort_three(t_stack *a);
+void	sort_four(t_stack *a, t_stack *b);
+void	sort_five(t_stack *a, t_stack *b);
+void	index_bits_max(t_stack *stack);
+
+void	free_args(char **av, int flag);
+void	free_nodes(t_stack *stack, int flag);
+void	s7lb(char **arg, int i);
+void	pop(t_stack *stack);
+
+int		stack_lengh(t_node *node);
+int		is_sorted(t_stack *stack_a);
 
 #endif

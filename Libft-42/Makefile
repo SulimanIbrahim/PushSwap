@@ -6,14 +6,14 @@
 #    By: suibrahi <suibrahi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/23 16:59:41 by suibrahi          #+#    #+#              #
-#    Updated: 2023/11/20 22:34:46 by suibrahi         ###   ########.fr        #
+#    Updated: 2023/11/24 20:46:06 by suibrahi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g3
 AR = ar rcs
 RM = rm -f
 
